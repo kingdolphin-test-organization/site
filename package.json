@@ -1,0 +1,21 @@
+{
+  "name": "shared-test",
+  "version": "1.0.0",
+  "author": "Leon Montealegre",
+  "license": "Unlicense",
+  "description": "shared front end",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingdolphin-test-organization/site.git"
+  },
+  "devDependencies": {
+    "kingdolphin-test-scripts": "^1.1.1",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "serialeazy": "^2.0.3"
+  },
+  "scripts": {
+    "test": "kingdolphin-test-scripts test"
+  }
+}
