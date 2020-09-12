@@ -9,7 +9,7 @@
     "url": "git+https://github.com/kingdolphin-test-organization/site.git"
   },
   "devDependencies": {
-    "kingdolphin-test-scripts": "^1.1.1",
+    "kingdolphin-test-scripts": "^1.1.2",
     "typescript": "^4.0.2"
   },
   "dependencies": {
