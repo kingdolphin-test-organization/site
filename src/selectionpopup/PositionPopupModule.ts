@@ -13,7 +13,7 @@ export class PositionPopupModule extends SelectionPopupModule {
     private xbox: HTMLInputElement;
     private ybox: HTMLInputElement;
 
-    public constructor(circuitController: MainDesignerController) {
+    public constructor(circuitController: MainDesignerController<any>) {
         super(circuitController, $("div#popup-pos-text"));
 
         this.xbox = this.el.find("input#popup-position-x")[0] as HTMLInputElement;

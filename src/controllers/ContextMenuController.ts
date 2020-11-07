@@ -6,12 +6,13 @@ import {CreateDeleteGroupAction} from "core/actions/deletion/DeleteGroupActionFa
 import {CreateGroupSelectAction,
         CreateDeselectAllAction} from "core/actions/selection/SelectAction";
 
-import {MainDesignerController} from "site/shared/controllers/MainDesignerController";
+import {MainDesignerController} from "shared/controllers/MainDesignerController";
+import {CircuitDesigner} from "core/models";
 
 export class ContextMenuController {
     private contextMenu: JQuery<HTMLElement>;
 
-    public constructor(main: MainDesignerController) {
+    public constructor(main: MainDesignerController<CircuitDesigner>) {
         this.contextMenu = $("#context-menu");
 
         const canvas = main.getCanvas();

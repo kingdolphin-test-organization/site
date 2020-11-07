@@ -1,4 +1,4 @@
-import {MainDesignerController} from "site/shared/controllers/MainDesignerController";
+import {MainDesignerController} from "shared/controllers/MainDesignerController";
 
 /**
 * A selection popup module is one of the "properties" that is displayed to the user (for view or sometimes editing) when an appropriate circuit component
@@ -8,11 +8,11 @@ import {MainDesignerController} from "site/shared/controllers/MainDesignerContro
 * TODO: Do I even need a el?
 */
 export abstract class SelectionPopupModule {
-    protected circuitController: MainDesignerController;
+    protected circuitController: MainDesignerController<any>;
 
     protected el: JQuery<HTMLElement>;
 
-    public constructor(circuitController: MainDesignerController, parentel: JQuery<HTMLElement>) {
+    public constructor(circuitController: MainDesignerController<any>, parentel: JQuery<HTMLElement>) {
         this.circuitController = circuitController;
         this.el = parentel;
     }

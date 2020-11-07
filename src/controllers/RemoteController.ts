@@ -1,4 +1,4 @@
-import {AuthState} from "../../digital/auth/AuthState";
+import {AuthState} from "../api/auth/AuthState";
 import {CircuitMetadata} from "core/models/CircuitMetadata";
 import {CreateUserCircuit, UpdateUserCircuit,
         QueryUserCircuits, LoadUserCircuit,

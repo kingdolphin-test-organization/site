@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-import {AuthState} from "../../digital/auth/AuthState";
+import {AuthState} from "./auth/AuthState";
 import {CircuitMetadata, CircuitMetadataDef} from "core/models/CircuitMetadata";
 import {Circuit} from "core/models/Circuit";
 

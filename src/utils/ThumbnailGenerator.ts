@@ -7,7 +7,7 @@ import {BoundingBox} from "core/utils/math/BoundingBox"
 import {CircuitDesigner} from "core/models/CircuitDesigner";
 import {CullableObject} from "core/models/CullableObject";
 
-import {CircuitView} from "site/shared/views/CircuitView";
+import {CircuitView} from "shared/views/CircuitView";
 
 export class ThumbnailGenerator {
     private view: CircuitView;

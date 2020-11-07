@@ -7,7 +7,7 @@ import {Selectable} from "core/utils/Selectable";
 
 import {Action} from "core/actions/Action";
 
-import {CircuitView} from "site/shared/views/CircuitView";
+import {CircuitView} from "shared/views/CircuitView";
 
 import {Tool} from "core/tools/Tool";
 import {ToolManager} from "core/tools/ToolManager";
@@ -17,12 +17,12 @@ import {PanTool} from "core/tools/PanTool";
 import {CircuitDesigner} from "core/models/CircuitDesigner";
 import {CopyController} from "./CopyController";
 
-export abstract class DesignerController {
+export abstract class DesignerController<T extends CircuitDesigner> {
     private active: boolean;
 
     protected input: Input;
 
-    protected designer: CircuitDesigner;
+    protected designer: T;
     protected view: CircuitView;
 
     protected toolManager: ToolManager;
@@ -30,7 +30,7 @@ export abstract class DesignerController {
 
     private renderQueue: RenderQueue;
 
-    protected constructor(designer: CircuitDesigner, view: CircuitView) {
+    protected constructor(designer: T, view: CircuitView) {
         this.active = true;
 
         this.designer = designer;
@@ -38,9 +38,7 @@ export abstract class DesignerController {
 
         // utils
         this.selectionTool = new SelectionTool(this.designer, this.getCamera());
-        this.toolManager = new ToolManager(this.selectionTool);
-
-        this.toolManager.addTools(new PanTool(this.getCamera()));
+        this.toolManager = this.createToolManager();
 
         this.renderQueue = new RenderQueue(() =>
             this.view.render(this.designer,
@@ -62,6 +60,8 @@ export abstract class DesignerController {
         window.addEventListener("resize", _e => this.resize(), false);
     }
 
+    protected abstract createToolManager(): ToolManager;
+
     private resize(): void {
         this.view.resize();
         this.render();
@@ -75,7 +75,7 @@ export abstract class DesignerController {
         this.toolManager.addAction(action);
     }
 
-    public render(): void {
+    public render = () => {
         this.renderQueue.render();
     }
 
@@ -186,6 +186,4 @@ export abstract class DesignerController {
     public isActive(): boolean {
         return this.active;
     }
-
-
 }

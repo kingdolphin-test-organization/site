@@ -4,25 +4,26 @@ import {CreateDeleteGroupAction} from "core/actions/deletion/DeleteGroupActionFa
 import {IOObject} from "core/models/IOObject";
 
 import {MainDesignerController} from "./MainDesignerController";
+import {CircuitDesigner} from "core/models";
 
-export abstract class CopyController {
+export abstract class CopyController<T extends CircuitDesigner> {
 
-    public constructor(main: MainDesignerController) {
+    public constructor(main: MainDesignerController<T>) {
         document.addEventListener("copy",  (e) => this.onCopy(e, main),  false);
         document.addEventListener("cut",   (e) => this.onCut(e, main),   false);
         document.addEventListener("paste", (e) => this.onPaste(e, main), false);
     }
 
-    private isActive(main: MainDesignerController): boolean {
+    private isActive(main: MainDesignerController<T>): boolean {
         // Only paste if main designer is active and
         //  current tool is SelectionTool
         return main.isActive() && main.getCurrentTool() == main.getSelectionTool();
     }
 
-    public abstract copy(main: MainDesignerController): string;
-    public abstract paste(data: string, main: MainDesignerController): void;
+    public abstract copy(main: MainDesignerController<T>): string;
+    public abstract paste(data: string, main: MainDesignerController<T>): void;
 
-    private onCopy(e: ClipboardEvent, main: MainDesignerController): void {
+    private onCopy(e: ClipboardEvent, main: MainDesignerController<T>): void {
         if (!this.isActive(main))
             return;
 
@@ -31,7 +32,7 @@ export abstract class CopyController {
         e.preventDefault();
     }
 
-    private onCut(e: ClipboardEvent, main: MainDesignerController): void {
+    private onCut(e: ClipboardEvent, main: MainDesignerController<T>): void {
         if (!this.isActive(main))
             return;
 
@@ -47,7 +48,7 @@ export abstract class CopyController {
         main.render();
     }
 
-    private onPaste(e: ClipboardEvent, main: MainDesignerController): void {
+    private onPaste(e: ClipboardEvent, main: MainDesignerController<T>): void {
         if (!this.isActive(main))
             return;
 

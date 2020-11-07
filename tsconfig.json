@@ -4,8 +4,9 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "lib": ["es2019", "dom"],
+    "jsx": "react",
     "moduleResolution": "node",
-    "module": "es6",
+    "module": "esnext",
     "target": "es5",
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -17,10 +18,17 @@
         "node_modules/@types"
     ],
     "baseUrl": ".",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "strict": false,
+    "isolatedModules": true,
     "paths": {
         "Vector": ["lib/core/src/utils/math/Vector"],
         "math/*": ["lib/core/src/utils/math/*"],
-        "core/*": ["lib/core/src/*"]
+        "core/*": ["lib/core/src/*"],
+        "shared/*": ["src/*"]
     }
   },
   "exclude": [

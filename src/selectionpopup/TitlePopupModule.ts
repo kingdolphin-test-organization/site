@@ -6,7 +6,7 @@ import {SelectionPopupModule} from "./SelectionPopupModule";
 export class TitlePopupModule extends SelectionPopupModule {
     private title: JQuery<HTMLInputElement>;
 
-    public constructor(circuitController: MainDesignerController) {
+    public constructor(circuitController: MainDesignerController<any>) {
         // Title module does not have a wrapping div
         super(circuitController, $("input#popup-name"));
 

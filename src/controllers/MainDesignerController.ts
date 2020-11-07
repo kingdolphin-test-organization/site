@@ -15,43 +15,39 @@ import {CircuitMetadata,
         CircuitMetadataBuilder} from "core/models/CircuitMetadata";
 import {Component} from "core/models/Component";
 
-import {ThumbnailGenerator} from "site/shared/utils/ThumbnailGenerator";
+import {ThumbnailGenerator} from "shared/utils/ThumbnailGenerator";
 
-import {CircuitView} from "site/shared/views/CircuitView";
+import {CircuitView} from "shared/views/CircuitView";
 
-import {SelectionPopupController} from "site/shared/controllers/SelectionPopupController";
-import {DesignerController} from "site/shared/controllers/DesignerController";
-import {HeaderController} from "site/shared/controllers/HeaderController";
+// import {SelectionPopupController} from "shared/controllers/SelectionPopupController";
+import {DesignerController} from "shared/controllers/DesignerController";
+// import {HeaderController} from "shared/controllers/HeaderController";
 
-import {ItemNavController} from "./ItemNavController";
+// import {ItemNavController} from "./ItemNavController";
 import {CopyController} from "./CopyController";
 
-export abstract class MainDesignerController extends DesignerController {
-    protected itemNav: ItemNavController;
-    protected selectionPopup: SelectionPopupController;
-    protected headerController: HeaderController;
+export abstract class MainDesignerController<T extends CircuitDesigner> extends DesignerController<T> {
+    // protected itemNav: ItemNavController;
+    // protected selectionPopup: SelectionPopupController;
+    // protected headerController: HeaderController;
 
     protected thumbnailGenerator: ThumbnailGenerator;
 
     private locked: boolean;
 
-    protected constructor(designer: CircuitDesigner,
+    protected constructor(designer: T,
                           view: CircuitView,
                           thumbnailGenerator: ThumbnailGenerator) {
         super(designer, view);
 
         this.thumbnailGenerator = thumbnailGenerator;
 
-        this.selectionPopup = new SelectionPopupController(this);
-        this.headerController = new HeaderController(this);
+        // this.selectionPopup = new SelectionPopupController(this);
+        // this.headerController = new HeaderController(this);
 
         this.locked = false;
 
-        this.toolManager.addTools(new RotateTool(this.getCamera()),
-                                  new TranslateTool(this.getCamera()),
-                                  new PlaceComponentTool(this.designer, this.getCamera()));
-
-        this.getSelectionTool().addSelectionChangeListener(() => this.selectionPopup.update());
+        // this.getSelectionTool().addSelectionChangeListener(() => this.selectionPopup.update());
     }
 
     public setLocked(locked: boolean): void {
@@ -68,7 +64,7 @@ export abstract class MainDesignerController extends DesignerController {
         this.clearSelections();
         this.getSelectionTool().disableSelections(locked);
 
-        this.itemNav.setActive(!locked);
+        // this.itemNav.setActive(!locked);
 
         this.render();
     }
@@ -109,7 +105,7 @@ export abstract class MainDesignerController extends DesignerController {
     }
 
     public saveCircuit(thumbnail: boolean = true): string {
-        const name = this.headerController.getProjectName();
+        const name = "";//this.headerController.getProjectName();
         const thumb = (thumbnail) ? (this.thumbnailGenerator.generate(this.designer)) : ("data;,");
 
         const data = new Circuit(
@@ -128,22 +124,22 @@ export abstract class MainDesignerController extends DesignerController {
     public setActive(on: boolean): void {
         super.setActive(on);
 
-        this.itemNav.setActive(on);
+        // this.itemNav.setActive(on);
     }
 
     public isLocked(): boolean {
         return this.locked;
     }
 
-    public abstract getCopyController(): CopyController;
+    public abstract getCopyController(): CopyController<T>;
 
-    public getSelectionPopup(): SelectionPopupController {
-        return this.selectionPopup;
-    }
+    // public getSelectionPopup(): SelectionPopupController {
+    //     return this.selectionPopup;
+    // }
 
     protected onMouseDrag(button: number): boolean {
         if (super.onMouseDrag(button)) {
-            this.selectionPopup.hide();
+            // this.selectionPopup.hide();
             return true;
         }
         return false;
@@ -151,7 +147,7 @@ export abstract class MainDesignerController extends DesignerController {
 
     protected onMouseUp(button: number): boolean {
         if (super.onMouseUp(button)) {
-            this.selectionPopup.update();
+            // this.selectionPopup.update();
             return true;
         }
         return false;
@@ -159,7 +155,7 @@ export abstract class MainDesignerController extends DesignerController {
 
     protected onClick(button: number): boolean {
         if (super.onClick(button)) {
-            this.selectionPopup.update();
+            // this.selectionPopup.update();
             return true;
         }
         return false;
@@ -167,7 +163,7 @@ export abstract class MainDesignerController extends DesignerController {
 
     protected onDoubleClick(button: number): boolean {
         if (super.onDoubleClick(button)) {
-            this.selectionPopup.update();
+            // this.selectionPopup.update();
             return true;
         }
         return false;
@@ -175,7 +171,7 @@ export abstract class MainDesignerController extends DesignerController {
 
     protected onKeyDown(key: number): boolean {
         if (super.onKeyDown(key)) {
-            this.selectionPopup.update();
+            // this.selectionPopup.update();
             return true;
         }
         return false;
@@ -184,7 +180,7 @@ export abstract class MainDesignerController extends DesignerController {
     protected onZoom(zoom: number, center: Vector): boolean {
         super.onZoom(zoom, center);
 
-        this.selectionPopup.update();
+        // this.selectionPopup.update();
 
         return true;
     }
