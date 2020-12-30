@@ -13,6 +13,7 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noErrorTruncation": true,
     "allowJs": true,
     "typeRoots" : [
         "node_modules/@types"

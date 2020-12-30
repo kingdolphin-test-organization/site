@@ -1,8 +1,6 @@
-import React from "react";
-import {observer} from "mobx-react";
+import React, {useContext} from "react";
 
-import {useInfoStores} from "shared/data/infoContext";
-import {useItemNavStores} from "./context";
+import {MainContext, ItemNavContext} from "shared/contexts";
 
 import "./style.scss";
 
@@ -22,19 +20,21 @@ export type ItemNavConfig = {
 type Props = {
     config: ItemNavConfig;
 }
-export const ItemNav = observer(({config}: Props) => {
-    const {itemNavStore: store} = useItemNavStores();
-    const {infoStore} = useInfoStores();
+export const ItemNav = ({config}: Props) => {
+    const {circuitInfo} = useContext(MainContext);
+    const {isOpen, toggle} = useContext(ItemNavContext);
+
+    const {isLocked} = circuitInfo;
 
     return (
     <>
         { // Hide tab if the circuit is locked
-        !infoStore.isLocked &&
-            <div className={`tab ${store.isOpen ? "tab__closed" : ""}`}
+        !isLocked &&
+            <div className={`tab ${isOpen ? "tab__closed" : ""}`}
                  title="Circuit Components"
-                 onClick={() => store.toggle()}></div>
+                 onClick={() => toggle()}></div>
         }
-        <nav className={`itemnav ${store.isOpen ? "" : "itemnav__move"}`}>
+        <nav className={`itemnav ${isOpen ? "" : "itemnav__move"}`}>
             {config.sections.map((section) =>
                 <React.Fragment key={`itemnav-section-${section.id}`}>
                     <h4>{section.label}</h4>
@@ -50,5 +50,5 @@ export const ItemNav = observer(({config}: Props) => {
         </nav>
     </>
     );
-});
+};
 

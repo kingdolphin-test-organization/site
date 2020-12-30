@@ -1,15 +1,14 @@
-import React from "react";
-import {observer} from "mobx-react";
+import React, {useContext} from "react";
 
-import {useSiteStores} from "../../data/siteContext";
+import {SideNavContext} from "shared/contexts";
 
 import "./style.scss";
 
-export const Overlay = observer(() => {
-    const {sideNavStore} = useSiteStores();
+export const Overlay = () => {
+    const {isOpen, toggle} = useContext(SideNavContext);
 
     return (
-        <div className={`overlay ${sideNavStore.isOpen ? "" : "invisible"}`}
-             onClick={() => sideNavStore.toggle()}></div>
+        <div className={`overlay ${isOpen ? "" : "invisible"}`}
+             onClick={() => toggle()}></div>
     );
-});
+};

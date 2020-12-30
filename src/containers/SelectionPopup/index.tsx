@@ -45,9 +45,9 @@ export const SelectionPopup = () => {
                 </label>
             </div>
 
-            <button id="popup-ic-button" type="button" alt="Create">Create IC</button>
-            <button id="popup-ic-viewer-button" type="button" alt="Create">View IC</button>
-            <button id="popup-bus-button" type="button" alt="Create a bus between selected ports">Bus</button>
+            <button id="popup-ic-button" type="button" title="Create">Create IC</button>
+            <button id="popup-ic-viewer-button" type="button" title="Create">View IC</button>
+            <button id="popup-bus-button" type="button" title="Create a bus between selected ports">Bus</button>
         </div>
     );
 }

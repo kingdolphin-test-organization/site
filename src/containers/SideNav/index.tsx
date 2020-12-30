@@ -1,10 +1,8 @@
-import React from "react";
-import {observer} from "mobx-react";
+import React, {useContext} from "react";
 
 import {CircuitMetadata} from "core/models/CircuitMetadata";
-import {RemoteController} from "../../controllers/RemoteController";
-
-import {useSiteStores} from "../../data/siteContext";
+import {RemoteController} from "shared/controllers/RemoteController";
+import {SideNavContext} from "shared/contexts";
 
 import "./style.scss";
 
@@ -35,11 +33,11 @@ type Props = {
     examples: CircuitMetadata[];
     onCircuitLoad: (contents: string) => void;
 }
-export const SideNav = observer(({circuits, examples, onCircuitLoad}: Props) => {
-    const {sideNavStore} = useSiteStores();
+export const SideNav = ({circuits, examples, onCircuitLoad}: Props) => {
+    const {isOpen} = useContext(SideNavContext);
 
     return (
-        <div className={`sidenav ${sideNavStore.isOpen ? "" : "sidenav__move"}`}>
+        <div className={`sidenav ${isOpen ? "" : "sidenav__move"}`}>
             <div className="sidenav__accountinfo"></div>
             <div className="sidenav__content">
                 <h4 unselectable="on">My Circuits</h4>
@@ -65,4 +63,4 @@ export const SideNav = observer(({circuits, examples, onCircuitLoad}: Props) => 
             </div>
         </div>
     )
-});
+};
